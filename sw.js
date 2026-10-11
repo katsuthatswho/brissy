@@ -1,4 +1,4 @@
-const VERSION="v12";
+const VERSION="v13";
 const CACHE=`brissy-${VERSION}`;
 const FALLBACK=["./manifest.webmanifest","./icon.svg"];
 
