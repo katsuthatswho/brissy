@@ -51,17 +51,17 @@ async function geocode(query){
  const hit=hits[0];if(!hit)throw Error('not found');const coord=hit.geometry.coordinates;geocache[query]=coord;try{localStorage.setItem('brissy-geocodes-v1',JSON.stringify(geocache))}catch{}return coord;
 }
 function metres(a,b){const rad=Math.PI/180;const dlat=(b[1]-a[1])*rad,dlon=(b[0]-a[0])*rad;const v=Math.sin(dlat/2)**2+Math.cos(a[1]*rad)*Math.cos(b[1]*rad)*Math.sin(dlon/2)**2;return 12742000*Math.atan2(Math.sqrt(v),Math.sqrt(1-v))}
-const queue=coffee.map(p=>p.name);let busy=false;const distances={};const drives={};
+const queue=places.map(p=>p.id);let busy=false;const distances={};window.brissyDistances={};const drives={};
 async function processQueue(){
  if(busy)return;busy=true;
  let start;
  try{start=await geocode(origin)}catch{busy=false;return}
- for(const name of queue){
+ for(const id of queue){
   try{
-   const p=venueByName.get(name.toLowerCase());
+   const p=places.find(x=>x.id===id);const name=p.name;
    const coord=await geocode((p?.address?name+' '+p.address:name+' '+p.area)+' Brisbane Queensland');
    const straight=metres(start,coord);
-   if(straight<25000){const approx=Math.round(straight*1.25/50)*50;distances[name]=approx;applyDistances()}
+   if(straight<25000){const approx=Math.round(straight*1.25/50)*50;distances[name]=approx;window.brissyDistances[id]=approx;if(document.querySelector('#sort')?.value==='distance')drawVenues();else applyDistances()}
   }catch{}
   await new Promise(resolve=>setTimeout(resolve,1100));
  }
@@ -70,10 +70,10 @@ async function processQueue(){
 function applyDistances(){
  document.querySelectorAll('#venues .venue').forEach(card=>{
   const name=card.querySelector('h2')?.textContent;
-  if(!name||!coffee.some(p=>p.name===name))return;
+  if(!name)return;
   let line=card.querySelector('.coffee-walk');
   if(!line){line=document.createElement('div');line.className='coffee-walk';card.querySelector('.rating')?.insertAdjacentElement('afterend',line)}
-  const d=distances[name];
+  const p=venueByName.get(name.toLowerCase());const d=p?window.brissyDistances[p.id]:null;
   line.innerHTML=d!=null?'<b>From Tower One</b><span>Walk · ~'+d.toLocaleString('en-AU')+' m · ~'+Math.max(1,Math.round(d/80))+' min <a href="'+walkingUrl(name)+'" target="_blank" rel="noopener">Directions ↗</a></span><span>Drive · <a href="'+drivingUrl(name)+'" target="_blank" rel="noopener">See drive time in Google Maps ↗</a></span><small>Walking distance and time are approximate. Driving time depends on route and traffic.</small>':'<b>From Tower One</b><span>Walk · <a href="'+walkingUrl(name)+'" target="_blank" rel="noopener">Directions ↗</a></span><span>Drive · <a href="'+drivingUrl(name)+'" target="_blank" rel="noopener">Drive time ↗</a></span>';
  });
 }
