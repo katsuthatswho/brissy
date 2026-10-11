@@ -1,4 +1,4 @@
-const VERSION="v7";
+const VERSION="v8";
 const CACHE=`brissy-${VERSION}`;
 const FALLBACK=["./manifest.webmanifest","./icon.svg"];
 
@@ -44,6 +44,7 @@ self.addEventListener("fetch",event=>{
       else if(!html.includes("final-polish.css")) html=html.replace("</head>",`<link rel="stylesheet" href="./final-polish.css?v=${VERSION}"></head>`);
       if(!html.includes("makeover.js")) html=html.replace("</body>",`<script src="./makeover.js?v=${VERSION}"></script></body>`);
       if(!html.includes("map-guide.js")) html=html.replace("</body>",`<script src="./map-guide.js?v=${VERSION}"></script></body>`);
+      if(!html.includes("airbnb-shortcut.js")) html=html.replace("</body>",`<script src="./airbnb-shortcut.js?v=${VERSION}"></script></body>`);
       return new Response(html,{status:200,headers:{"Content-Type":"text/html; charset=utf-8","Cache-Control":"no-store, max-age=0","X-Brissy-Version":VERSION}});
     })());
     return;
