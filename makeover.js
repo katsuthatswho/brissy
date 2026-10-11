@@ -1,1 +1,98 @@
-(()=>{const text=(sel,value)=>{const el=document.querySelector(sel);if(el)el.textContent=value};text('header span','BRISBANE · OCT 2026');[['#explore .eyebrow','EAT & DRINK'],['#explore h1','Good food, no spreadsheet.'],['#explore .sub','Coffee, Japanese, Vietnamese, Italian and a few places worth leaving the neighbourhood for.'],['#mapScreen .eyebrow','GET AROUND'],['#mapScreen h1','Where everything is.'],['#mapScreen .sub','Home, PPA and the food areas you’ll actually use.'],['#plan .eyebrow','11–18 OCTOBER'],['#plan h1','The week.'],['#plan .sub','A useful plan, not a timetable. Move meals around as the pickleball schedule changes.'],['#essentials .eyebrow','BRISBANE NOTES'],['#essentials h1','Stuff worth knowing.'],['#essentials .sub','Transport, neighbourhoods, coffee hours and a few things that are easy to miss.'],['#ppa .eyebrow','PPA BRISBANE · 13–18 OCT'],['#ppa h1','Pickleball week.'],['#ppa .sub','What’s on each day, plus the latest published start times.']].forEach(([s,v])=>text(s,v));const banner=document.querySelector('.ppa-banner');if(banner){const sm=banner.querySelector('small'),h=banner.querySelector('h2'),p=banner.querySelector('p');if(sm)sm.textContent='AUSTRALIAN PICKLEBALL CUP · PPA1500';if(h)h.textContent='Plan the day around the draw.';if(p)p.textContent='Queensland Tennis Centre · Tennyson';}const status=document.querySelector('#ppaStatus');if(status&&/Wednesday event start times/.test(status.textContent))status.textContent='Wednesday has published event starts. The other days are still rough planning windows until the draw fills in.';const guideMap={'Your Sydney clock is wrong':'Brisbane is an hour behind Sydney','The commute can be a river cruise':'Take the ferry when you can','Almost every trip is 50c':'Public transport is 50c','Meet the brown snake':'The river changes how you get around','Yes, that’s a city beach':'There’s a beach at South Bank','Get your coffee early':'Coffee shuts early','West End is your local':'West End is the easy default','Do Inala before dinner':'Go to Inala for lunch','October turns purple':'Jacarandas are out','Going out? Head to the Valley':'For late nights: the Valley','PPA is further out than it looks':'Leave time for Tennyson','Need groceries?':'Groceries nearby','Arriving late?':'Late arrival backup'};document.querySelectorAll('.guide-item summary span:first-child').forEach(el=>{if(guideMap[el.textContent])el.textContent=guideMap[el.textContent]});document.querySelectorAll('.bottom button').forEach(b=>{if(b.textContent.trim().endsWith('Local tips'))b.lastChild.textContent=' Local'});const tidy=()=>document.querySelectorAll('.venue .note').forEach(p=>{p.textContent=p.textContent.replace(/worth a detour/gi,'worth the trip').replace(/great option/gi,'good option').replace(/perfect for/gi,'good for').replace(/food playground/gi,'food area').replace(/hidden gem/gi,'small local spot').replace(/must[- ]try/gi,'popular').replace(/vibrant/gi,'busy').replace(/nestled/gi,'in').replace(/boasts/gi,'has')});tidy();new MutationObserver(tidy).observe(document.body,{subtree:true,childList:true});})();
+(()=>{
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const setText=(s,v)=>{const e=$(s);if(e)e.textContent=v};
+const tripStart=new Date('2026-10-11T00:00:00+10:00'),tripEnd=new Date('2026-10-18T23:59:59+10:00');
+
+// Brand + page copy
+setText('header span','11–18 OCT · BRISBANE');
+const hb=$('#headerHome');if(hb)hb.textContent='Home + PPA';
+[
+ ['#explore .eyebrow','FOOD'],['#explore h1','Where to eat.'],['#explore .sub','Coffee, Japanese, Vietnamese, Italian and the places worth keeping in your back pocket.'],
+ ['#mapScreen .eyebrow','MAP'],['#mapScreen h1','Home, PPA, neighbourhoods.'],['#mapScreen .sub','The useful geography. Food markers show areas; each venue card has the exact Google Maps pin.'],
+ ['#plan .eyebrow','11–18 OCTOBER'],['#plan h1','Your week.'],['#plan .sub','Start here. Food, pickleball and the bits of Brisbane you actually have time for.'],
+ ['#ppa .eyebrow','PPA BRISBANE · 13–18 OCT'],['#ppa h1','Pickleball.'],['#ppa .sub','What is on each day, what time to roughly keep free, and the live tournament links.'],
+ ['#essentials .eyebrow','LOCAL NOTES'],['#essentials h1','Good to know.'],['#essentials .sub','Transport, neighbourhoods, coffee hours and a few Brisbane-specific things that will save you time.']
+].forEach(([s,v])=>setText(s,v));
+
+// Navigation: trip first, browsing second
+const nav=$('.bottom');
+if(nav){
+ const order=['plan','explore','ppa','mapScreen','essentials'];
+ const labels={plan:'Week',explore:'Food',ppa:'PPA',mapScreen:'Map',essentials:'Local'};
+ order.forEach(id=>{const b=nav.querySelector(`[data-tab="${id}"]`);if(b){const glyph=b.querySelector('.glyph');b.innerHTML='';if(glyph)b.appendChild(glyph);b.append(document.createTextNode(labels[id]));nav.appendChild(b)}});
+}
+
+// Move location card out of food and into the trip hub
+const home=$('#explore .home'), today=$('#todayCard');
+if(home&&today){
+ const small=home.querySelector('small');if(small)small.textContent='YOUR BASE';
+ home.classList.add('trip-base');
+ today.insertAdjacentElement('afterend',home);
+}
+
+// Week quick actions
+const planSub=$('#plan .sub');
+if(planSub&&!$('#tripQuick')){
+ const q=document.createElement('div');q.id='tripQuick';q.className='trip-quick';
+ q.innerHTML='<button data-screen="ppa"><b>PPA</b><span>Schedule + times</span></button><button data-screen="explore"><b>Food</b><span>Pick the next meal</span></button><a href="https://www.google.com/maps/dir/?api=1&origin=1+Cordelia+Street+South+Brisbane+QLD+4101&destination=190+King+Arthur+Terrace+Tennyson+QLD+4105" target="_blank" rel="noopener"><b>Route</b><span>Home → PPA</span></a>';
+ planSub.insertAdjacentElement('afterend',q);
+}
+
+// Make today genuinely useful
+function brisbaneNow(){return new Date(new Date().toLocaleString('en-US',{timeZone:'Australia/Brisbane'}))}
+function tidyToday(){
+ const now=brisbaneNow(), d=now.getDate(), m=now.getMonth()+1;
+ const card=$('#todayCard .today-card');
+ if(!card)return;
+ const matching=$$('#days .day').find(x=>{const t=x.querySelector('.tag')?.textContent||'';return m===10&&new RegExp(`\\b${d}\\b`).test(t)});
+ const label=card.querySelector('.day-label');if(label)label.textContent=(m===10&&d>=11&&d<=18)?`TODAY · ${now.toLocaleDateString('en-AU',{weekday:'short',day:'numeric',month:'short'})}`:'YOUR BRISBANE WEEK';
+ if(matching){
+   const h=card.querySelector('h2');if(h)h.textContent=matching.querySelector('h2')?.textContent||'Today';
+   const p=card.querySelector('p');const bits=$$('p',matching).slice(0,2).map(x=>x.textContent.replace(/\s+/g,' ').trim());if(p&&bits.length)p.textContent=bits.join(' · ');
+   matching.classList.add('is-today');
+ }
+ const btn=card.querySelector('#viewToday');if(btn){btn.textContent='Jump to today';btn.onclick=()=>matching?.scrollIntoView({behavior:'smooth',block:'start'})}
+ const link=card.querySelector('a');if(link)link.textContent='Route to PPA ↗';
+}
+tidyToday();
+
+// Cleaner food cards
+function polishVenues(){
+ $$('.venue').forEach(v=>{
+   if(v.dataset.polished)return;v.dataset.polished='1';
+   const links=[...v.querySelectorAll('.actions a')];
+   links.forEach(a=>{const t=a.textContent.toLowerCase();if(t.includes('menu'))a.textContent='Menu ↗';else if(t.includes('instagram'))a.textContent='Instagram ↗';else if(t.includes('google maps'))a.textContent='Map ↗'});
+   const note=v.querySelector('.note');if(note){note.textContent=note.textContent.replace(/worth a detour/gi,'worth the trip').replace(/great option/gi,'good option').replace(/perfect for/gi,'good for').replace(/food playground/gi,'food area').replace(/hidden gem/gi,'small local spot')}
+ });
+}
+polishVenues();
+new MutationObserver(polishVenues).observe($('#venues')||document.body,{childList:true,subtree:true});
+
+// PPA: make confirmed vs planning estimates obvious
+function polishPpa(){
+ $$('.ppa-day').forEach((row,i)=>{
+   if(row.querySelector('.time-state'))return;
+   const p=row.querySelector('p');if(!p)return;
+   const confirmed=/published|8am|10am|10:30am|12pm|6pm/i.test(p.textContent);
+   const tag=document.createElement('span');tag.className='time-state '+(confirmed?'confirmed':'estimate');tag.textContent=confirmed?'PUBLISHED':'ROUGH WINDOW';
+   row.querySelector('div')?.insertBefore(tag,p);
+ });
+}
+polishPpa();new MutationObserver(polishPpa).observe($('#ppaDays')||document.body,{childList:true,subtree:true});
+const pb=$('.ppa-banner');if(pb){setText('.ppa-banner small','AUSTRALIAN PICKLEBALL CUP · PPA1500');setText('.ppa-banner h2','Plan around the draw.');setText('.ppa-banner p','Queensland Tennis Centre · Tennyson');}
+
+// Local guide: scan first, expand when needed
+$$('.guide-item').forEach(d=>d.removeAttribute('open'));
+const headingMap={
+ 'Your Sydney clock is wrong':'Brisbane is an hour behind Sydney','The commute can be a river cruise':'Take the ferry when you can','Almost every trip is 50c':'Public transport is 50c','Meet the brown snake':'The river changes how you get around','Yes, that’s a city beach':'There’s a beach at South Bank','Get your coffee early':'Coffee shuts early','West End is your local':'West End is the easy default','Do Inala before dinner':'Go to Inala for lunch','October turns purple':'Jacarandas are out','Going out? Head to the Valley':'For late nights: the Valley','PPA is further out than it looks':'Leave time for Tennyson','Need groceries?':'Groceries nearby','Arriving late?':'Late arrival backup'
+};
+$$('.guide-item summary span:first-child').forEach(e=>{if(headingMap[e.textContent])e.textContent=headingMap[e.textContent]});
+
+// Replace blocking copy alerts with a small toast
+const toast=document.createElement('div');toast.id='toast';toast.setAttribute('role','status');document.body.appendChild(toast);
+function say(msg){toast.textContent=msg;toast.classList.add('show');clearTimeout(say.t);say.t=setTimeout(()=>toast.classList.remove('show'),1600)}
+window.copyPlace=async which=>{const a=['1 Cordelia Street, South Brisbane, QLD 4101','Queensland Tennis Centre, 190 King Arthur Terrace, Tennyson, QLD 4105'];try{await navigator.clipboard.writeText(a[which]);say(which?'PPA address copied':'Airbnb address copied')}catch{say('Press and hold to copy the address')}};
+
+// Root URL should open to the trip hub, not the restaurant database
+if(!location.hash&&typeof openTab==='function')openTab('plan');
+})();
