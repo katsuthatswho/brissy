@@ -1,0 +1,36 @@
+{
+  "checkedAt": "2026-10-11T03:00:00Z",
+  "notice": "Official event overview: 13–18 October confirmed. Exact match times and order of play have not been published there. Refresh checks the latest published data; use Draws & match times for live fixtures.",
+  "days": [
+    [
+      "Tue 13",
+      "Opening day",
+      "Amateur draws and pro qualifying. Match times to be confirmed."
+    ],
+    [
+      "Wed 14",
+      "Early rounds",
+      "Amateur draws and pro qualifying continue."
+    ],
+    [
+      "Thu 15",
+      "Qualifying & early rounds",
+      "Outdoor-court matches. Check the official draw for exact times."
+    ],
+    [
+      "Fri 16",
+      "Pro main draws",
+      "Pro and Senior Pro main draws on undercover show courts."
+    ],
+    [
+      "Sat 17",
+      "Show-court action",
+      "Pro and Senior Pro main draws continue."
+    ],
+    [
+      "Sun 18",
+      "Finals",
+      "Championship matches at Pat Rafter Arena. Session times to be confirmed."
+    ]
+  ]
+}
