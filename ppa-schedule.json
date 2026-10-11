@@ -1,36 +1,59 @@
 {
   "checkedAt": "2026-10-11T04:00:00Z",
-  "notice": "Wednesday 14 October start times are published. Thursday–Sunday exact start times are not yet listed. Planning windows are estimates only. Tap Start times for the official live page.",
+  "notice": "Wednesday 14 Oct: published event start times below (not individual match times). Other days: exact start times still unconfirmed. Check official Start times before travelling.",
   "days": [
     [
       "Tue 13",
       "Pro training",
-      "No pro qualifiers required. Good day to explore Brisbane."
+      [
+        "Training day",
+        "No pro qualifiers required",
+        "Good day to explore Brisbane"
+      ]
     ],
     [
       "Wed 14",
       "Round of 64 & 32",
-      "8am men's singles · 10am mixed doubles · 10:30am men's doubles · 12pm women's singles · 6pm women's doubles. Published event starts."
+      [
+        "8:00am — Men’s singles",
+        "10:00am — Mixed doubles",
+        "10:30am — Men’s doubles",
+        "12:00pm — Women’s singles",
+        "6:00pm — Women’s doubles",
+        "Published event starts, not individual match times"
+      ]
     ],
     [
       "Thu 15",
       "Round of 16 + amateurs",
-      "Start times pending. Tentatively keep 8am–6pm available."
+      [
+        "Exact start times pending",
+        "Planning window: roughly 8am–6pm (estimate)"
+      ]
     ],
     [
       "Fri 16",
       "Quarter-finals + amateurs",
-      "Start times pending. Tentatively keep 9am–7pm available."
+      [
+        "Exact start times pending",
+        "Planning window: roughly 9am–7pm (estimate)"
+      ]
     ],
     [
       "Sat 17",
       "Semi-finals + amateurs",
-      "Start times pending. Tentatively keep 9am–7pm available."
+      [
+        "Exact start times pending",
+        "Planning window: roughly 9am–7pm (estimate)"
+      ]
     ],
     [
       "Sun 18",
       "Medal matches + amateurs",
-      "Start times pending. Keep late morning through evening flexible for finals."
+      [
+        "Exact start times pending",
+        "Finals expected later in the day; no confirmed session times"
+      ]
     ]
   ]
 }
