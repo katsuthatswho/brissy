@@ -1,1 +1,53 @@
-const CACHE="brissy-shell-v6";const SHELL=["./","./index.html","./manifest.webmanifest","./icon.svg","./makeover.css","./final-polish.css","./makeover.js","./westend.js","./ppa-schedule.json"];self.addEventListener("install",e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(SHELL)));self.skipWaiting()});self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))));self.clients.claim()});async function fresh(req){try{const r=await fetch(req,{cache:"no-store"});if(r.ok){const copy=r.clone();caches.open(CACHE).then(c=>c.put(req,copy))}return r}catch{return caches.match(req)}}self.addEventListener("fetch",e=>{if(e.request.method!=="GET"||new URL(e.request.url).origin!==self.location.origin)return;if(e.request.mode==="navigate"){e.respondWith((async()=>{let r=await fresh(e.request);if(!r)return r;let html=await r.text();if(!html.includes("makeover.css"))html=html.replace("</head>",'<link rel="stylesheet" href="./makeover.css?v=6"><link rel="stylesheet" href="./final-polish.css?v=1"></head>');else if(!html.includes("final-polish.css"))html=html.replace("</head>",'<link rel="stylesheet" href="./final-polish.css?v=1"></head>');if(!html.includes("makeover.js"))html=html.replace("</body>",'<script src="./makeover.js?v=6"></script></body>');if(!html.includes("westend.js"))html=html.replace("</body>",'<script src="./westend.js?v=3"></script></body>');return new Response(html,{status:200,headers:{"Content-Type":"text/html; charset=utf-8","Cache-Control":"no-cache"}})})());return}e.respondWith(fresh(e.request))});
+const VERSION="v7";
+const CACHE=`brissy-${VERSION}`;
+const FALLBACK=["./manifest.webmanifest","./icon.svg"];
+
+self.addEventListener("install",event=>{
+  event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FALLBACK)));
+  self.skipWaiting();
+});
+
+self.addEventListener("activate",event=>{
+  event.waitUntil((async()=>{
+    const keys=await caches.keys();
+    await Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)));
+    await self.clients.claim();
+  })());
+});
+
+self.addEventListener("message",event=>{
+  if(event.data==="SKIP_WAITING") self.skipWaiting();
+});
+
+async function networkFirst(request){
+  const cache=await caches.open(CACHE);
+  try{
+    const response=await fetch(request,{cache:"reload"});
+    if(response&&response.ok) cache.put(request,response.clone());
+    return response;
+  }catch(error){
+    return (await cache.match(request)) || Response.error();
+  }
+}
+
+self.addEventListener("fetch",event=>{
+  if(event.request.method!=="GET") return;
+  const url=new URL(event.request.url);
+  if(url.origin!==self.location.origin) return;
+
+  if(event.request.mode==="navigate"){
+    event.respondWith((async()=>{
+      const response=await networkFirst(event.request);
+      if(!response || !response.ok) return response;
+      let html=await response.text();
+      if(!html.includes("makeover.css")) html=html.replace("</head>",`<link rel="stylesheet" href="./makeover.css?v=${VERSION}"><link rel="stylesheet" href="./final-polish.css?v=${VERSION}"></head>`);
+      else if(!html.includes("final-polish.css")) html=html.replace("</head>",`<link rel="stylesheet" href="./final-polish.css?v=${VERSION}"></head>`);
+      if(!html.includes("makeover.js")) html=html.replace("</body>",`<script src="./makeover.js?v=${VERSION}"></script></body>`);
+      if(!html.includes("map-guide.js")) html=html.replace("</body>",`<script src="./map-guide.js?v=${VERSION}"></script></body>`);
+      return new Response(html,{status:200,headers:{"Content-Type":"text/html; charset=utf-8","Cache-Control":"no-store, max-age=0","X-Brissy-Version":VERSION}});
+    })());
+    return;
+  }
+
+  event.respondWith(networkFirst(event.request));
+});
