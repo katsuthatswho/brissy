@@ -6,11 +6,11 @@ const metaTheme=document.querySelector('meta[name="theme-color"]');if(metaTheme)
 setText('header span','BRISBANE · 11–18 OCT');
 const hb=$('#headerHome');if(hb)hb.textContent='Home + PPA';
 [
- ['#explore .eyebrow','FOOD'],['#explore h1','Food list.'],['#explore .sub','The places I’d keep saved: coffee, Japanese, Vietnamese, Italian and a few extras.'],
- ['#mapScreen .eyebrow','MAP'],['#mapScreen h1','Map + neighbourhoods.'],['#mapScreen .sub','Home, PPA and the parts of Brisbane you’re likely to use. Venue cards have the exact pins.'],
- ['#plan .eyebrow','11–18 OCTOBER'],['#plan h1','The week.'],['#plan .sub','The working plan. Move meals around as the pickleball draw changes.'],
- ['#ppa .eyebrow','PPA BRISBANE · 13–18 OCT'],['#ppa h1','PPA schedule.'],['#ppa .sub','Published starts where we have them. Rough windows everywhere else.'],
- ['#essentials .eyebrow','LOCAL'],['#essentials h1','Useful stuff.'],['#essentials .sub','The things you might actually need while you’re here.']
+ ['#explore .eyebrow','FOOD'],['#explore h1','Food list.'],['#explore .sub','Coffee, Vietnamese, Japanese, Italian and a few other places worth knowing.'],
+ ['#mapScreen .eyebrow','MAP'],['#mapScreen h1','Map + neighbourhoods.'],['#mapScreen .sub','Your Airbnb, the courts and neighbourhoods to explore. Restaurant cards link to Google Maps.'],
+ ['#plan .eyebrow','11–18 OCTOBER'],['#plan h1','The week.'],['#plan .sub','Work, matches and meals. Adjust as the draw changes.'],
+ ['#ppa .eyebrow','PPA BRISBANE · 13–18 OCT'],['#ppa h1','PPA schedule.'],['#ppa .sub','Published start times where available. Unconfirmed times are labelled.'],
+ ['#essentials .eyebrow','LOCAL'],['#essentials h1','Useful stuff.'],['#essentials .sub','Groceries, transport and practical details.']
 ].forEach(([s,v])=>setText(s,v));
 
 const nav=$('.bottom');
