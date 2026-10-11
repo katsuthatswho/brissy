@@ -1,6 +1,7 @@
 (()=>{
 const origin='1 Cordelia Street, South Brisbane QLD 4101';
 const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const drivingUrl=name=>'https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(origin)+'&destination='+encodeURIComponent(name+', Brisbane QLD')+'&travelmode=driving';
 const walkingUrl=name=>'https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(origin)+'&destination='+encodeURIComponent(name+', Brisbane QLD')+'&travelmode=walking';
 const coffee=places.filter(p=>p.cuisine==='Coffee');
 const venueByName=new Map(places.map(p=>[p.name.toLowerCase(),p]));
@@ -36,7 +37,7 @@ function editSlot(i,kind,button){
  holder.append(select,reset);button.remove();
  select.focus();
 }
-const style=document.createElement('style');style.textContent='.week-choice{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:11px 0;border-top:1px solid #e7e1d8;font-size:13px;flex-wrap:wrap}.week-choice>div:first-child{display:flex;flex-direction:column;gap:5px;min-width:0;flex:1}.week-kind{font-size:11px;color:#5d6763;font-weight:750}.week-choice a{color:#20534e;font-weight:650;line-height:1.45}.week-change,.week-reset{border:1px solid #d3dbd4;background:#f0f5f0;border-radius:9px;padding:8px 11px;color:#20534e;font-size:12px;font-weight:700}.week-select{width:100%;padding:11px;border:1px solid #bac9c0;border-radius:10px;background:white;color:#1e403d;font-size:14px}.coffee-walk{font-size:12px;margin:9px 0;color:#365c52;line-height:1.5}.coffee-walk a{color:#20534e;text-decoration:underline}.coffee-walk small{display:block;color:#6d7771;font-size:10px;margin-top:2px}';document.head.appendChild(style);
+const style=document.createElement('style');style.textContent='.week-choice{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:11px 0;border-top:1px solid #e7e1d8;font-size:13px;flex-wrap:wrap}.week-choice>div:first-child{display:flex;flex-direction:column;gap:5px;min-width:0;flex:1}.week-kind{font-size:11px;color:#5d6763;font-weight:750}.week-choice a{color:#20534e;font-weight:650;line-height:1.45}.week-change,.week-reset{border:1px solid #d3dbd4;background:#f0f5f0;border-radius:9px;padding:8px 11px;color:#20534e;font-size:12px;font-weight:700}.week-select{width:100%;padding:11px;border:1px solid #bac9c0;border-radius:10px;background:white;color:#1e403d;font-size:14px}.coffee-walk{font-size:12px;margin:9px 0;color:#365c52;line-height:1.5}.coffee-walk a{color:#20534e;text-decoration:underline}.coffee-walk small{display:block;color:#6d7771;font-size:10px;margin-top:2px}';style.textContent += '.coffee-walk{display:flex;flex-direction:column;gap:5px}.coffee-walk>b{font-size:12px}.coffee-walk>span{display:block;line-height:1.55}';document.head.appendChild(style);
 renderWeek();
 // Distances are deliberately labelled as approximate: geocoded points and a straight-line
 // distance uplift, not a pedestrian routing service. Google Maps provides actual walking routes.
@@ -50,7 +51,7 @@ async function geocode(query){
  const hit=hits[0];if(!hit)throw Error('not found');const coord=hit.geometry.coordinates;geocache[query]=coord;try{localStorage.setItem('brissy-geocodes-v1',JSON.stringify(geocache))}catch{}return coord;
 }
 function metres(a,b){const rad=Math.PI/180;const dlat=(b[1]-a[1])*rad,dlon=(b[0]-a[0])*rad;const v=Math.sin(dlat/2)**2+Math.cos(a[1]*rad)*Math.cos(b[1]*rad)*Math.sin(dlon/2)**2;return 12742000*Math.atan2(Math.sqrt(v),Math.sqrt(1-v))}
-const queue=coffee.map(p=>p.name);let busy=false;const distances={};
+const queue=coffee.map(p=>p.name);let busy=false;const distances={};const drives={};
 async function processQueue(){
  if(busy)return;busy=true;
  let start;
@@ -73,7 +74,7 @@ function applyDistances(){
   let line=card.querySelector('.coffee-walk');
   if(!line){line=document.createElement('div');line.className='coffee-walk';card.querySelector('.rating')?.insertAdjacentElement('afterend',line)}
   const d=distances[name];
-  line.innerHTML=d!=null?'From Tower One: ~'+d.toLocaleString('en-AU')+' m · ~'+Math.max(1,Math.round(d/80))+' min walk <a href="'+walkingUrl(name)+'" target="_blank" rel="noopener">Route ↗</a><small>Approximate, not a mapped walking route</small>':'<a href="'+walkingUrl(name)+'" target="_blank" rel="noopener">Walking directions from Tower One ↗</a>';
+  line.innerHTML=d!=null?'<b>From Tower One</b><span>Walk · ~'+d.toLocaleString('en-AU')+' m · ~'+Math.max(1,Math.round(d/80))+' min <a href="'+walkingUrl(name)+'" target="_blank" rel="noopener">Directions ↗</a></span><span>Drive · <a href="'+drivingUrl(name)+'" target="_blank" rel="noopener">See drive time in Google Maps ↗</a></span><small>Walking distance and time are approximate. Driving time depends on route and traffic.</small>':'<b>From Tower One</b><span>Walk · <a href="'+walkingUrl(name)+'" target="_blank" rel="noopener">Directions ↗</a></span><span>Drive · <a href="'+drivingUrl(name)+'" target="_blank" rel="noopener">Drive time ↗</a></span>';
  });
 }
 let queued=false;new MutationObserver(()=>{if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;applyDistances()})}).observe(document.querySelector('#venues'),{childList:true});
