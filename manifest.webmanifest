@@ -1,12 +1,12 @@
 {
-  "name": "BRISSY · Food & Coffee",
+  "name": "BRISSY · Brisbane pocket guide",
   "short_name": "BRISSY",
-  "description": "Brisbane foodie pocket guide",
+  "description": "Brisbane trip guide for 11–18 October: food, PPA, map and local notes.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#f7f5f0",
-  "theme_color": "#f7f5f0",
+  "background_color": "#f2ecdf",
+  "theme_color": "#f2ecdf",
   "icons": [
     {
       "src": "icon.svg",
