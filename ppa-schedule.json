@@ -1,10 +1,10 @@
 {
-  "checkedAt": "2026-10-11T08:30:00Z",
-  "notice": "Updated 11 Oct · Brisbane time. Official event programme is available for the week; individual match times are not independently verified. Wednesday event starts are from the previously published schedule. Check Start times for changes.",
+  "checkedAt": "2026-10-11T09:52:27.588524+00:00",
+  "notice": "Official event page checked. Event runs 13\u201318 October at Queensland Tennis Centre. The page describes the day-by-day stages but does not provide a verified match-by-match order of play. Check the tournament draws for match times.",
   "days": [
     [
       "Tue 13",
-      "Opening day · training and early play",
+      "Opening day \u00b7 training and early play",
       [
         "PPA event week begins",
         "Pro training / early-week activity",
@@ -14,19 +14,19 @@
     ],
     [
       "Wed 14",
-      "Early pro rounds · Round of 64 & 32",
+      "Early pro rounds \u00b7 Round of 64 & 32",
       [
-        "8:00am — Men’s singles (previously published event start)",
-        "10:00am — Mixed doubles (previously published event start)",
-        "10:30am — Men’s doubles (previously published event start)",
-        "12:00pm — Women’s singles (previously published event start)",
-        "6:00pm — Women’s doubles (previously published event start)",
+        "8:00am \u2014 Men\u2019s singles (previously published event start)",
+        "10:00am \u2014 Mixed doubles (previously published event start)",
+        "10:30am \u2014 Men\u2019s doubles (previously published event start)",
+        "12:00pm \u2014 Women\u2019s singles (previously published event start)",
+        "6:00pm \u2014 Women\u2019s doubles (previously published event start)",
         "These are event starts, not individual match times"
       ]
     ],
     [
       "Thu 15",
-      "Early rounds · amateur draws",
+      "Early rounds \u00b7 amateur draws",
       [
         "Early-week matches across outdoor courts",
         "Pro and amateur sessions expected",
@@ -36,7 +36,7 @@
     ],
     [
       "Fri 16",
-      "Pro main draw · quarter-finals",
+      "Pro main draw \u00b7 quarter-finals",
       [
         "Pro and Senior Pro play moves towards show courts",
         "Amateur events continue",
@@ -46,7 +46,7 @@
     ],
     [
       "Sat 17",
-      "Semi-finals · amateur draws",
+      "Semi-finals \u00b7 amateur draws",
       [
         "Pro and Senior Pro main-draw action on show courts",
         "Amateur events continue",
