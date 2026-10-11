@@ -1,58 +1,66 @@
 {
-  "checkedAt": "2026-10-11T04:00:00Z",
-  "notice": "Wednesday 14 Oct: published event start times below (not individual match times). Other days: exact start times still unconfirmed. Check official Start times before travelling.",
+  "checkedAt": "2026-10-11T08:30:00Z",
+  "notice": "Updated 11 Oct · Brisbane time. Official event programme is available for the week; individual match times are not independently verified. Wednesday event starts are from the previously published schedule. Check Start times for changes.",
   "days": [
     [
       "Tue 13",
-      "Pro training",
+      "Opening day · training and early play",
       [
-        "Training day",
-        "No pro qualifiers required",
-        "Good day to explore Brisbane"
+        "PPA event week begins",
+        "Pro training / early-week activity",
+        "Amateur draws may be running; exact sessions unverified",
+        "No reliable individual match times published here"
       ]
     ],
     [
       "Wed 14",
-      "Round of 64 & 32",
+      "Early pro rounds · Round of 64 & 32",
       [
-        "8:00am — Men’s singles",
-        "10:00am — Mixed doubles",
-        "10:30am — Men’s doubles",
-        "12:00pm — Women’s singles",
-        "6:00pm — Women’s doubles",
-        "Published event starts, not individual match times"
+        "8:00am — Men’s singles (previously published event start)",
+        "10:00am — Mixed doubles (previously published event start)",
+        "10:30am — Men’s doubles (previously published event start)",
+        "12:00pm — Women’s singles (previously published event start)",
+        "6:00pm — Women’s doubles (previously published event start)",
+        "These are event starts, not individual match times"
       ]
     ],
     [
       "Thu 15",
-      "Round of 16 + amateurs",
+      "Early rounds · amateur draws",
       [
-        "Exact start times pending",
-        "Planning window: roughly 8am–6pm (estimate)"
+        "Early-week matches across outdoor courts",
+        "Pro and amateur sessions expected",
+        "Exact start times not independently verified",
+        "Keep the day flexible; check official start times"
       ]
     ],
     [
       "Fri 16",
-      "Quarter-finals + amateurs",
+      "Pro main draw · quarter-finals",
       [
-        "Exact start times pending",
-        "Planning window: roughly 9am–7pm (estimate)"
+        "Pro and Senior Pro play moves towards show courts",
+        "Amateur events continue",
+        "Arena play expected as tournament progresses",
+        "Exact match order and times pending verification"
       ]
     ],
     [
       "Sat 17",
-      "Semi-finals + amateurs",
+      "Semi-finals · amateur draws",
       [
-        "Exact start times pending",
-        "Planning window: roughly 9am–7pm (estimate)"
+        "Pro and Senior Pro main-draw action on show courts",
+        "Amateur events continue",
+        "Exact semi-final times not independently verified"
       ]
     ],
     [
       "Sun 18",
-      "Medal matches + amateurs",
+      "Championship finals",
       [
-        "Exact start times pending",
-        "Finals expected later in the day; no confirmed session times"
+        "Finals on Pat Rafter Arena",
+        "Championship matches expected throughout the finals programme",
+        "Exact session and medal-match times not independently verified",
+        "Check the official order of play before travelling"
       ]
     ]
   ]
