@@ -1,0 +1,20 @@
+name: Refresh PPA schedule
+on:
+  schedule:
+    - cron: '0 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check official PPA page
+        run: python3 scripts/update_ppa.py
+      - name: Publish changes if any
+        run: |
+          git config user.name "brissy-schedule-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add ppa-schedule.json
+          git diff --cached --quiet || (git commit -m "Refresh PPA published event details" && git push)
