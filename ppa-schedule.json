@@ -1,66 +1,60 @@
 {
-  "checkedAt": "2026-10-13T07:35:08.427086+00:00",
-  "notice": "Official event page checked. Event runs 13\u201318 October at Queensland Tennis Centre. The page describes the day-by-day stages but does not provide a verified match-by-match order of play. Check the tournament draws for match times.",
+  "checkedAt": "2026-10-13T11:45:00Z",
+  "notice": "Updated 13 Oct · Brisbane time. Pro round schedule and 10am broadcast starts are published in the 12 Oct tournament preview. Broadcast times are NOT individual match start times. The official match-by-match start-times page could not be verified. Check the official draw before travelling.",
   "days": [
     [
       "Tue 13",
-      "Opening day \u00b7 training and early play",
+      "Training / tournament preparations",
       [
-        "PPA event week begins",
-        "Pro training / early-week activity",
-        "Amateur draws may be running; exact sessions unverified",
-        "No reliable individual match times published here"
+        "Tournament registration lists 13–18 Oct; PPA Tour pro programme begins Wednesday 14 Oct",
+        "No verified public pro match start times for Tuesday",
+        "Check your own amateur draw if competing"
       ]
     ],
     [
       "Wed 14",
-      "Early pro rounds \u00b7 Round of 64 & 32",
+      "Pro Round of 64 + Round of 32",
       [
-        "8:00am \u2014 Men\u2019s singles (previously published event start)",
-        "10:00am \u2014 Mixed doubles (previously published event start)",
-        "10:30am \u2014 Men\u2019s doubles (previously published event start)",
-        "12:00pm \u2014 Women\u2019s singles (previously published event start)",
-        "6:00pm \u2014 Women\u2019s doubles (previously published event start)",
-        "These are event starts, not individual match times"
+        "10:00am–6:00pm · PPA Tour YouTube broadcast window (Brisbane time)",
+        "Pro early rounds; individual match times not verified",
+        "Amateur divisions: check official start-times page"
       ]
     ],
     [
       "Thu 15",
-      "Early rounds \u00b7 amateur draws",
+      "Pro Round of 16",
       [
-        "Early-week matches across outdoor courts",
-        "Pro and amateur sessions expected",
-        "Exact start times not independently verified",
-        "Keep the day flexible; check official start times"
+        "10:00am–6:00pm · PPA Tour YouTube broadcast window",
+        "Individual match times not verified",
+        "Amateur divisions: check official start-times page"
       ]
     ],
     [
       "Fri 16",
-      "Pro main draw \u00b7 quarter-finals",
+      "Pro quarter-finals",
       [
-        "Pro and Senior Pro play moves towards show courts",
-        "Amateur events continue",
-        "Arena play expected as tournament progresses",
-        "Exact match order and times pending verification"
+        "10:00am–6:00pm · PPA Tour YouTube broadcast window",
+        "Individual match times not verified",
+        "Amateur divisions: check official start-times page"
       ]
     ],
     [
       "Sat 17",
-      "Semi-finals \u00b7 amateur draws",
+      "Pro semi-finals",
       [
-        "Pro and Senior Pro main-draw action on show courts",
-        "Amateur events continue",
-        "Exact semi-final times not independently verified"
+        "10:00am–6:00pm · PPA Tour YouTube broadcast window",
+        "Individual match times not verified",
+        "Amateur divisions: check official start-times page"
       ]
     ],
     [
       "Sun 18",
-      "Championship finals",
+      "Pro championship finals",
       [
-        "Finals on Pat Rafter Arena",
-        "Championship matches expected throughout the finals programme",
-        "Exact session and medal-match times not independently verified",
-        "Check the official order of play before travelling"
+        "10:00am–4:00pm · PPA Tour YouTube broadcast window",
+        "Championship matches at Queensland Tennis Centre",
+        "Individual final match times not verified",
+        "Amateur divisions: check official start-times page"
       ]
     ]
   ]
