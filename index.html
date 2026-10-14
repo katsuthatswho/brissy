@@ -43,4 +43,4 @@ async function refreshPpa(){const b=document.querySelector("#ppaRefresh");b.disa
 document.querySelector("#ppaRefresh").onclick=refreshPpa;refreshPpa();
 const hash=location.hash.replace("#","");const target={map:"mapScreen",week:"plan",essentials:"essentials",explore:"explore",ppa:"ppa"}[hash];if(target)openTab(target);
 if("serviceWorker" in navigator)navigator.serviceWorker.register("./sw.js?v=20").catch(()=>{});
-</script><script src="./map-guide.js?v=13"></script><script src="./airbnb-shortcut.js?v=13"></script><script src="./makeover.js?v=13"></script><script src="./trip-customise.js?v=16"></script><script src="./court-finder.js?v=21"></script></body></html>
+</script><script src="./map-guide.js?v=13"></script><script src="./airbnb-shortcut.js?v=13"></script><script src="./makeover.js?v=13"></script><script src="./trip-customise.js?v=16"></script><script src="./court-finder.js?v=21"></script><script src="./seed-tracker.js?v=22"></script></body></html>
